@@ -49,6 +49,7 @@ public class KakaoAuthService {
                 .toUriString();
 
         ResponseEntity<Map> response = restTemplate.postForEntity(requestUri, null, Map.class);
+        System.out.println("💡 요청 URL: " + requestUri);
         return (String) response.getBody().get("access_token");
     }
 
