@@ -52,4 +52,15 @@ public class IngredientController {
         ingredientService.registerIngredientsByYolo(image);
     }
 
+
+    /**
+     * [POST] /api/ingredients/ocr
+     * OCR 이미지 업로드 API
+     * → 사용자가 영수증 이미지 업로드 -> 백엔드가 OCR 서버에 전송, 분석 결과 저장
+     */
+    @PostMapping(value = "/ocr", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @ResponseStatus(HttpStatus.CREATED)
+    public void registerByOcr(@RequestPart("image") MultipartFile image) {
+        ingredientService.registerIngredientsByOcr(image);
+    }
 }

@@ -4,6 +4,9 @@ import org.springframework.core.io.InputStreamResource;
 
 import java.io.InputStream;
 
+/**
+ * MultipartFile을 서버 전송용 Resource 객체로 감싸주는 유틸 클래스
+ */
 public class MultipartInputStreamFileResource extends InputStreamResource {
 
     private final String filename;

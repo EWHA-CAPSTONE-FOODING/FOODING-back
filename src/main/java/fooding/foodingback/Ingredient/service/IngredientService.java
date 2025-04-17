@@ -97,4 +97,45 @@ public class IngredientService {
     }
 
 
+    /**
+     * OCR 이미지로부터 식재료를 분석하고 저장하는 메서드
+     * - 이미지 파일을 OCR 서버에 전송
+     * - 응답받은 재료들을 저장
+     */
+    public void registerIngredientsByOcr(MultipartFile image) {
+        List<IngredientRequestDto> ocrResults = callOcrServer(image); // OCR 서버에서 분석 결과 가져오기
+        saveIngredients(ocrResults); // 기존 저장 로직 재사용
+    }
+
+    /**
+     * OCR 서버에 이미지를 보내고, 식재료 분석 결과를 받아오는 메서드
+     * - HTTP multipart/form-data 방식으로 이미지 전송
+     * - JSON 배열 형태 응답을 IngredientRequestDto[]로 파싱
+     */
+    private List<IngredientRequestDto> callOcrServer(MultipartFile image) {
+        try {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+
+            MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+            body.add("image", new MultipartInputStreamFileResource(image.getInputStream(), image.getOriginalFilename()));
+
+            HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
+
+            RestTemplate restTemplate = new RestTemplate();
+
+            ResponseEntity<IngredientRequestDto[]> response = restTemplate.postForEntity(
+                    "http://OCR_SERVER_IP:5000/ocr", // OCR 서버 주소로 교체 필요
+                    requestEntity,
+                    IngredientRequestDto[].class
+            );
+
+            return Arrays.asList(response.getBody());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return List.of(); // 오류 발생 시 빈 리스트 반환
+        }
+    }
+
 }
