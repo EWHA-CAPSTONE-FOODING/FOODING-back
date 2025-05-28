@@ -5,12 +5,23 @@ spring:
   application:
     name: fooding_back
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    #///driver-class-name: com.mysql.cj.jdbc.Driver
     # ?? PC? ????? Database ??? ?? ???
-    url: jdbc:mysql://localhost:3306/fooding?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    #///url: jdbc:mysql://localhost:3306/fooding?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
     # mysql? ??? ??? ?? ??? ?? ???.
-    username: root
-    password: mih001
+    #///username: root
+    #///password: mih001
+    url: jdbc:mysql://localhost:3306/foodingDB
+    username: foodingUser
+    password: foodingPass
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  # jpa ??
+  jpa:
+    open-in-view: false
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.MySQL8Dialect
   security:
     oauth2:
       client:
@@ -18,7 +29,7 @@ spring:
           kakao:
             client-id: "13027af4afa1f4548c29e52ee2745a0f"
             client-secret: "" # ???? Secret Key? ???? ??
-            redirect-uri: "http://localhost:8080/auth/kakao/callback"
+            redirect-uri: "http://3.36.159.65:8080/auth/kakao/callback"
             authorization-grant-type: authorization_code
             client-authentication-method: POST
             scope: profile_nickname, profile_image, account_email
@@ -32,9 +43,3 @@ spring:
 jwt:
   secret: "Capstone-Fantasy-40-Fooding-Secret-Key!"  # JWT 비밀 키 설정
 
-  # jpa ??
-  jpa:
-    open-in-view: false
-    show-sql: true
-    hibernate:
-      ddl-auto: update

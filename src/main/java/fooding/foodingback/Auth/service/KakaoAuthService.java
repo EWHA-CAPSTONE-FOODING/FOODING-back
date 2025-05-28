@@ -44,7 +44,7 @@ public class KakaoAuthService {
         String requestUri = UriComponentsBuilder.fromHttpUrl(tokenUri)
                 .queryParam("grant_type", "authorization_code")
                 .queryParam("client_id", clientId)
-                .queryParam("redirect_uri", "http://localhost:8080/auth/kakao/callback")
+                .queryParam("redirect_uri", "http://3.36.159.65:8080/auth/kakao/callback")
                 .queryParam("code", code)
                 .toUriString();
 
