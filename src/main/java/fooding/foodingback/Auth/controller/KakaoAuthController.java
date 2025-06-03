@@ -17,7 +17,7 @@ public class KakaoAuthController {
 
     @GetMapping("/kakao/callback")
     public RedirectView kakaoLogin(@RequestParam String code) {
-        // 카카오 로그인 로직 실행 (JWT는 생성하지만 사용 안 함)
+        // 카카오 로그인 로직 실행
         kakaoAuthService.kakaoLogin(code);
 
         // 프론트엔드로 리디렉션

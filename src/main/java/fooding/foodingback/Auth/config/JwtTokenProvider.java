@@ -11,7 +11,7 @@ import java.util.Date;
 @Slf4j
 @Component
 public class JwtTokenProvider {
-    private final String secretKey = "your-secret-key"; // ⚠️ 실제 프로젝트에서는 보안 환경변수로 관리해야 함
+    private final String secretKey = "your-secret-key";
     private final long validityInMilliseconds = 3600000; // 1시간
 
     public String createToken(String email) {
