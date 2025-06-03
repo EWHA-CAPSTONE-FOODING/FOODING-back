@@ -21,6 +21,6 @@ public class KakaoAuthController {
         kakaoAuthService.kakaoLogin(code);
 
         // 프론트엔드로 리디렉션
-        return new RedirectView("https://sparkling-naiad-b7cadc.netlify.app/");
+        return new RedirectView("https://tubular-gumption-b61ddd.netlify.app/");
     }
 }
